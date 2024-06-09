@@ -1,6 +1,6 @@
-import express from "express";
+// import express from "express";
 
-const app = express();
+// const app = express();
 
 // app.HTTP_METHOD(PATH, CALLBACK)
 
@@ -70,28 +70,53 @@ const app = express();
 
 // express router
 
-app.get("/", (req, res) => {
-  res.send("Hello from server!!!!");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello from server!!!!");
+// });
+
+// app.use(express.json());
+
+// const fakeUser = {
+//   id: 3,
+//   name: "Jane Doe",
+//   email: "somemail@gmail.com",
+// };
+
+// app
+//   .route("/users")
+//   .post((req, res) => {
+//     res.send({ ...fakeUser, ...req.body });
+//   })
+//   .get((req, res) => {
+//     res.send(fakeUser);
+//   })
+//   .put((req, res) => {
+//     res.send(fakeUser);
+//   });
+
+// export default app;
+
+// import app from "./app.js";
+
+// app.listen(3000, () => {
+//   console.log("Server is running on port 3000");
+// });
+
+import express from "express";
+const app = express();
+
+import usersRouter from "./routes/users-route.js";
 
 app.use(express.json());
 
-const fakeUser = {
-  id: 3,
-  name: "Jane Doe",
-  email: "somemail@gmail.com",
-};
+app.use("/users", usersRouter);
 
-app
-  .route("/users")
-  .post((req, res) => {
-    res.send({ ...fakeUser, ...req.body });
-  })
-  .get((req, res) => {
-    res.send(fakeUser);
-  })
-  .put((req, res) => {
-    res.send(fakeUser);
-  });
+app.get("/", (req, res) => {
+  res.send("Hello from express server!");
+});
+
+app.all("*", (req, res) => {
+  res.json({ message: "app.all handler" });
+});
 
 export default app;
