@@ -1,6 +1,15 @@
-// const app = require("./index");
-import app from "./index.js";
+import "dotenv/config";
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
-});
+import app from "./app.js";
+import runDbMigrations from "./db/migrations/index.js";
+
+async function start() {
+  await runDbMigrations();
+
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+    console.log(`😎😇 Running on port ${port} 😇😎`);
+  });
+}
+
+start();
