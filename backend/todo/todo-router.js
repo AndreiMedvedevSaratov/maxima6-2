@@ -12,17 +12,23 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
   const result = await todoRepository.findAll();
 
-  res.json(result);
+  res.status(200).json(result);
 });
 
 router.get("/:id", async (req, res) => {
   const result = await todoRepository.findOne(+req.params.id);
 
-  res.json(result);
+  res.status(200).json(result);
 });
 
 router.put("/:id", async (req, res) => {
   const result = await todoRepository.updateOne(+req.params.id, req.body);
+
+  res.json(result);
+});
+
+router.patch("/:id", async (req, res) => {
+  const result = await todoRepository.patchOne(+req.params.id, req.body);
 
   res.json(result);
 });

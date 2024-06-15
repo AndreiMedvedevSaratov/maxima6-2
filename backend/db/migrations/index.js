@@ -1,24 +1,23 @@
 import db from "../index.js";
-import createTodosTable from "./1_create-todos-table.js";
+import createTodosTable from "./1_create_todos_table.js";
 
 const runDbMigrations = async () => {
-  console.log("BEGIN DB MIGRATION");
+  console.log("Beginning database migrations");
 
-  // use single client for transactions
   const client = await db.connect();
 
   try {
-    await client.query("BEGIN"); // begin transaction
+    await client.query("Begin");
 
     await client.query(createTodosTable);
 
-    await client.query("COMMIT"); // commit transaction
+    await client.query("Commit");
 
-    console.log("END DB MIGRATION");
+    console.log("Finished database migrations");
   } catch (e) {
-    await client.query("ROLLBACK"); // rollback transaction
+    await client.query("Rollback");
 
-    console.log("DB migration failed");
+    console.log("Failed to migrate database");
 
     throw e;
   } finally {
