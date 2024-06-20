@@ -33,7 +33,7 @@ export default class Store {
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user);
-        } catch (e: any) {
+        } catch (e) {
             console.log(e.response?.data?.message);
         }
     }
@@ -45,7 +45,7 @@ export default class Store {
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user);
-        } catch (e: any) {
+        } catch (e) {
             console.log(e.response?.data?.message);
         }
     }
@@ -56,7 +56,7 @@ export default class Store {
             localStorage.removeItem('token');
             this.setAuth(false);
             this.setUser({} as IUser);
-        } catch (e: any) {
+        } catch (e) {
             console.log(e.response?.data?.message);
         }
     }
@@ -69,7 +69,7 @@ export default class Store {
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user);
-        } catch (e: any) {
+        } catch (e) {
             console.log(e.response?.data?.message);
         } finally {
             this.setLoading(false);
